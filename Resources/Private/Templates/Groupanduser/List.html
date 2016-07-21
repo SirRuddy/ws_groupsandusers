@@ -1,0 +1,27 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+    <f:flashMessages renderMode="div" />
+
+	<f:for each="{groupandusers}" as="groupanduser">
+      <div class="groupanduser">
+        <h2>&Uuml;bersicht aller {groupanduser.title}</h2>
+        <ul class="list-group">
+          <f:for each="{groupanduser.users}" as="user">
+              <f:if condition="{user.company}">
+                  <f:then>
+                      <li class="list-group-item">
+                          <f:link.action action="show" arguments="{item:user.uid}">{user.company}</f:link.action> - <strong>{user.city}</strong>
+                      </li>
+                  </f:then>
+                  <f:else>
+                    <li>FooBar</li>
+                  </f:else>
+              </f:if>
+          </f:for>
+        </ul>
+       </div>
+	</f:for>
+
+</f:section>

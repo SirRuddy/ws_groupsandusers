@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="de" datatype="plaintext" original="messages" date="2015-03-24T18:31:50Z" product-name="ws_groupsandusers">
+		<header/>
+		<body>
+			<trans-unit id="tx_wsgroupsandusers_domain_model_groupanduser">
+				<source>Groupanduser</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

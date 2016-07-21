@@ -1,0 +1,71 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+  <f:flashMessages renderMode="div" />
+  
+  <f:if condition="{user.image} != ''">
+    <f:then>
+        <img src="/fileadmin/user_upload/images/logos/{user.image}" class="img-responsive img-thumbnail" style="max-width:360px; max-height:240px" alt="{user.company}" title="{user.company}">
+    </f:then>
+  </f:if>
+
+  <div itemscope itemtype="http://schema.org/Organization">
+    <h2 itemprop="name">{user.company} - {user.city} (ID:{user.uid})</h2>
+    <blockquote>
+        <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <span itemprop="streetAddress">{user.address}</span><br>
+            <span itemprop="postalCode">{user.zip}</span> <span itemprop="addressLocality">{user.city}</span>
+        </div>
+        <p>
+          <f:if condition="{user.telephone} != ''">
+            <f:then>
+              <i class="fa fa-phone"></i> <span itemprop="telephone">{user.telephone}</span><br>
+            </f:then>
+          </f:if>
+            
+          <f:if condition="{user.fax} != ''">
+            <f:then>
+              <i class="fa fa-fax"></i> <span itemprop="faxNumber">{user.fax}</span><br>
+            </f:then>
+          </f:if>
+            
+          <f:if condition="{user.email} != ''">
+            <f:security.ifAuthenticated>
+              <f:then>
+                <i class="fa fa-envelope"></i> <span itemprop="email"><f:link.email email="{user.email}" /></span><br>
+              </f:then>
+              <f:else>
+                <i class="fa fa-envelope"></i> <em>Bitte melden Sie sich <a href="/mitmachen/login.html">hier</a> an, um die Email sehen zu k&ouml;nnen.</em><br>
+              </f:else>
+            </f:security.ifAuthenticated>
+          </f:if>
+          
+          <f:if condition="{user.www} != ''">
+            <f:then>
+              <i class="fa fa-globe"></i> <span itemprop="www"><a href="{user.www}" target="_blank" rel="nofollow">{user.www}</a></span>
+            </f:then>
+          </f:if>
+        </p>
+  </blockquote>
+  </div> 
+  
+  <f:if condition="{user.comments} != ''">
+    <f:then>
+      <div class="panel panel-primary">
+          <div class="panel-heading"><h4>Infos zu {user.company} - {user.city}</h4></div>
+          <div class="panel-body">{user.comments}</div>
+      </div>
+    </f:then>
+  </f:if>
+    
+  <button type="button" class="btn btn-primary" onclick="goBack()"><i class="fa fa-step-backward"></i> Zur&uuml;ck</button>
+
+  <script>
+  function goBack() {
+      window.history.back();
+  }
+  </script>
+  <hr>
+  <iframe style="width:100%; min-height:450px;border:0" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q={user.city}%2C%20{user.zip}%2C%20{user.address}%2C%20Deutschland&key=AIzaSyCuA1BbP6VVJ5QiMxi4ESPbUL0pic_r2Ng"></iframe>
+</f:section>
